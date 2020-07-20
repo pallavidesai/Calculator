@@ -21,10 +21,8 @@ $(function () {
     return;
   }
   // open connection
-  alert("hello");
-  var HOST = location.origin.replace(/^http/, 'ws')
-alert(Host);
-  var connection = new WebSocket(HOST);
+
+  var connection = new WebSocket("ws://" + location.host);
   connection.onopen = function () {
     // first we want users to enter their names
     input.removeAttr('disabled');
