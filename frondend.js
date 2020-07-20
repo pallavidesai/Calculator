@@ -21,8 +21,7 @@ $(function () {
     return;
   }
   // open connection
-  var HOST = location.origin.replace(/^http/, 'ws');
-  var connection = new WebSocket(HOST);
+  var connection = new WebSocket("wss://friendly-calculator.herokuapp.com");
   connection.onopen = function () {
     // first we want users to enter their names
     input.removeAttr('disabled');
