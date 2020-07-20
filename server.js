@@ -33,7 +33,7 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
   // Not important for us. We're writing WebSocket server,
   // not HTTP server
 //});
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8081;
 const INDEX = '/index.html';
 
 const server = express()
