@@ -21,7 +21,9 @@ $(function () {
     return;
   }
   // open connection
+  alert("hello");
   var HOST = location.origin.replace(/^http/, 'ws')
+alert(Host);
   var connection = new WebSocket(HOST);
   connection.onopen = function () {
     // first we want users to enter their names
