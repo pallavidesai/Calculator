@@ -39,10 +39,6 @@ const INDEX = '/index.html';
 const server = express()
   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
-  server.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  });
 
 // server.listen(webSocketsServerPort, function() {
 //   console.log((new Date()) + " Server is listening on port "
