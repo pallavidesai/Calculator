@@ -72,6 +72,8 @@ wsServer.on('request', function(request) {
     connection.sendUTF(
         JSON.stringify({ type: 'history', data: history} ));
   }
+
+  
   // user sent some message
   connection.on('message', function(message) {
     if (message.type === 'utf8') { // accept only text
@@ -97,7 +99,7 @@ wsServer.on('request', function(request) {
           color: userColor
         };
         history.push(obj);
-        history = history.slice(-100);
+        history = history.slice(-10);
         // broadcast message to all connected clients
         var json = JSON.stringify({ type:'message', data: obj });
         for (var i=0; i < clients.length; i++) {
@@ -106,6 +108,8 @@ wsServer.on('request', function(request) {
       }
     }
   });
+
+
   // user disconnected
   connection.on('close', function(connection) {
     if (userName !== false && userColor !== false) {
