@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="/js/frondend.js"></script>
     <style>
     * { font-family:tahoma; font-size:12px; padding:0px;margin:0px;}
     #status { width:88px;display:block;float:left;margin-top:15px; }
@@ -133,27 +134,6 @@
         + ': ' + message + '</p>');
   }
 });
-
-        function dis(val) 
-         { 
-             document.getElementById("result").value+=val 
-         } 
-           
-         //function that evaluates the digit and return result 
-         function solve() 
-         { 
-             let x = document.getElementById("result").value 
-             let y = eval(x) 
-             document.getElementById("input").value = x + "=" + y 
-             document.getElementById("result").value = y 
-             $("input").change()
-         } 
-           
-         //function that clear the display 
-         function clr() 
-         { 
-             document.getElementById("result").value = "" 
-         } 
   </script>
   </head>
   <body>
