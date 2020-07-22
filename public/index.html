@@ -84,7 +84,6 @@
     // first response from the server with user's color
     if (json.type === 'color') { 
       myColor = json.data;
-      status.text(myName + ': ').css('color', myColor);
       input.removeAttr('disabled').focus();
       // from now user can start sending messages
     } else if (json.type === 'history') { // entire message history
