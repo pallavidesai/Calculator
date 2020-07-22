@@ -103,7 +103,11 @@ wsServer.on('request', function(request) {
         // broadcast message to all connected clients
         var json = JSON.stringify({ type:'message', data: obj });
         for (var i=0; i < clients.length; i++) {
-          clients[i].sendUTF(json);
+          if (history.length > 0) {
+            clients[i].sendUTF(
+                JSON.stringify({ type: 'history', data: history} ));
+          }
+        
         }
       }
     }

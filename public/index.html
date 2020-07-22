@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./frondend.js"></script>
+    
     <style>
     * { font-family:tahoma; font-size:12px; padding:0px;margin:0px;}
     #status { width:88px;display:block;float:left;margin-top:15px; }
@@ -21,8 +21,16 @@
          height: 30px; 
          width:100% 
          } 
+         h2 
+         {
+          text-align: center;
+          margin-top: 10px;
+         }
   </style>
-  <script>
+<script>
+  $(window).on("load", function ()  {
+        $('#output').hide();
+    });
     $(function () {
   // for better performance - to avoid searching in DOM
   var content = $('#content');
@@ -81,6 +89,7 @@
       // from now user can start sending messages
     } else if (json.type === 'history') { // entire message history
       // insert every single message to the chat window
+      content.empty();
       for (var i=0; i < json.data.length; i++) {
       addMessage(json.data[i].author, json.data[i].text,
           json.data[i].color, new Date(json.data[i].time));
@@ -110,6 +119,23 @@
         myName = msg;
       }
   });
+
+  $('#formsubmit').click(function(){
+      $('#nameContainer').hide();
+      $('#output').show(); 
+      var msg = document.getElementById("name").value;
+      $('h2').append(msg);
+      // send the message as an ordinary text
+      connection.send(msg);
+      $(this).val('');
+      // disable the input field to make the user wait until server
+      // sends back response
+      input.attr('disabled', 'disabled');
+      // we know that the first message sent from a user their name
+      if (myName === false) {
+        myName = msg;
+      }  
+    });
   /**
    * This method is optional. If the server wasn't able to
    * respond to the in 3 seconds then show some error message 
@@ -158,16 +184,17 @@ function clr()
   </script>
   </head>
   <body>
-    <div class="container">
-      <h2>Welcome to Shared Calculator</h2>
+    <h2 style="align-content:center">Welcome to Shared Calculator, </h2>
+    <div class="container" id="nameContainer">
       <br><br>
       <div class="form-group">
         <label for="name">Enter You Name:</label>
         <input type="name" class="form-control" id="name" placeholder="Enter name" name="name">
-        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="btn btn-primary" id="formsubmit">Submit</button>
       </div>
     </div>
    
+    <div id="output">
     <div id="content" class="container p-3 my-3 border"></div>
     <div>
       <span id="status">Connecting...</span>
@@ -207,5 +234,6 @@ function clr()
       </tr> 
    </table> 
   </div>
+</div>
   </body>
 </html>
