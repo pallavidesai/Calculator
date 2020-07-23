@@ -3,15 +3,18 @@ var express = require('express');
 var webSocketServer = require('websocket').server;
 var http = require('http');
 
+//List of chat history objects and clients 
 var history = [];
 var clients = [];
 
+// Escape input strings 
 function htmlEntities(str) {
   return String(str)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;')
     .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+// random color will be assigned to the user 
 var colors = ['red', 'green', 'blue', 'magenta', 'purple', 'plum', 'orange'];
 colors.sort(function (a, b) { return Math.random() > 0.5; });
 
@@ -29,7 +32,9 @@ var wsServer = new webSocketServer({
 wsServer.on('request', function (request) {
   console.log((new Date()) + ' Connection from origin '
     + request.origin + '.');
+  // making sure that client is connecting from our website
   var connection = request.accept(null, request.origin);
+  // get client index so that it will be easier to remove when disconnected
   var index = clients.push(connection) - 1;
   var userName = false;
   var userColor = false;
@@ -40,7 +45,8 @@ wsServer.on('request', function (request) {
   }
 
   connection.on('message', function (message) {
-    if (message.type === 'utf8') { 
+    if (message.type === 'utf8') {
+      // First message will always be the name of user 
       if (userName === false) {
         userName = htmlEntities(message.utf8Data);
         userColor = colors.shift();
@@ -59,6 +65,7 @@ wsServer.on('request', function (request) {
           color: userColor
         };
         history.push(obj);
+        // Keep only last 10 messages
         history = history.slice(-10);
         // broadcast message to all connected clients
         var json = JSON.stringify({ type: 'message', data: obj });

@@ -1,3 +1,7 @@
+    $(window).on("load", function () {
+      $('#output').hide();
+    });
+
 $(function () {
     var content = $('#content');
     var input = $('#input');
@@ -63,6 +67,7 @@ $(function () {
 
     };
 
+    // When "=" button pressed 
     input.change(function () {
         var msg = document.getElementById("input").value;
         connection.send(msg);
@@ -73,7 +78,7 @@ $(function () {
         }
     });
 
-    // Takes in User Name
+    // When username submitted
     $('#formsubmit').click(function () {
         $('#nameContainer').hide();
         $('#output').show();
@@ -87,6 +92,7 @@ $(function () {
         }
     });
 
+    // Show error message if server not reachable 
     setInterval(function () {
         if (connection.readyState !== 1) {
             status.text('Error');
