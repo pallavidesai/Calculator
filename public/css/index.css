@@ -1,0 +1,19 @@
+* { font-family:tahoma; font-size:12px; padding:0px;margin:0px;}
+    #status { width:88px;display:block;float:left;margin-top:15px; }
+         input[type="button"] 
+         { 
+         background-color:#F2F3F4; 
+         height: 30px; 
+         width:100% 
+         }   
+         input[type="text"] 
+         { 
+         background-color:white; 
+         height: 30px; 
+         width:100% 
+         } 
+         h2 
+         {
+          text-align: center;
+          margin-top: 10px;
+         }
